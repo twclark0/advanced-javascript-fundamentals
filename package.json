@@ -1,0 +1,19 @@
+{
+  "name": "advanced-javascript-fundamentals",
+  "version": "1.0.0",
+  "description": "Worksop docs for advanced-javascript-fundamentals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twclark0/advanced-javascript-fundamentals.git"
+  },
+  "author": "Tyler Clark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twclark0/advanced-javascript-fundamentals/issues"
+  },
+  "homepage": "https://github.com/twclark0/advanced-javascript-fundamentals#readme"
+}

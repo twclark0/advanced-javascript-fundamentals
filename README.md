@@ -71,4 +71,4 @@ As you will see, there is a directory called `exercises-completed` that shows th
 
 This material is available for private, non-commercial use under the
 [GPL version 3](http://www.gnu.org/licenses/gpl-3.0-standalone.html). If you have questions about using this workshop material in anyway, please contact me
-at ...
+at `tyler@tylerclark.dev`

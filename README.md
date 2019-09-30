@@ -15,18 +15,18 @@ This workshop is helpful for developers at any level of their career. Though it 
 While there are similarities between each lesson, we will work through each exercise independent of each other.
 
 1. Primitive Types, the What, How, and Why
-2. Reference Execution with the This Keyword
-3.  Understanding Strict Mode
-4. Understanding Implicit vs Explicit Coercion
-5. How Prototypal Inheritance Works in JS
-6. Utilize Date and Math Objects
-7. Use the ES6 Class Keyword
-8.  Hoisting Variables with Const, Let, Var
-9. Understand Lexical vs. Dynamic Scope
-10. Create New Objects with the New Keyword
-11. Hide Variables with Closures
-12. Infinitely Loop with Recursion
-13. Create an Immediately Invoked Function (IIFE)
+2. Understanding Implicit vs Explicit Coercion
+3. How Prototypal Inheritance Works in JS
+4.  Create New Objects with the New Keyword
+5. Reference Execution with the `this` Keyword
+6. Understand Lexical vs. Dynamic Scope
+7.  Infinitely Loop with Recursion
+8. Use the ES6 Class Keyword
+9.  Hoisting Variables with Const, Let, Var
+10. Hide Variables with Closures
+11. Create an Immediately Invoked Function (IIFE)
+12. Utilize Date and Math Objects
+13. Understanding Strict Mode
 
 ## System Requirements
 

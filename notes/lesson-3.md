@@ -59,7 +59,7 @@ console.log(a.prototype)
 
 ### Understanding the `new` keyword
 
-- Does three things: Creates a new object, connects new object's `__proto__` to function's `.prototype`, `this` used within called function points to new object created.
+- Does main three things: Creates a new object, connects new object's `__proto__` to function's `.prototype`, `this` used within called function points to new object created. (Fourth is it returns `this` which is that new object)
 
 1. Creates new object:
 

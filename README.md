@@ -3,6 +3,19 @@
 ✌️Hello! My name is Tyler Clark and this is the
 source material for my Advanced JS Fundamentals workshop
 
+## Why Should You Care About this Workshop?
+
+Many of the topics I will go over are not required for someone to know in order to be a "web developer". In fact, I know people that have worked in JavaScript for 10 years that have little to no idea of these concepts. So why should you care? I believe that understanding the foundations of JavaScript will take your career to the next level. I really mean it.
+
+Here are some of the real world takeaways from this workshop:
+
+1. You will be able to learn new frameworks more quickly.
+2. Not only will you avoid writing exceptions but will recognize errors quicker.
+3.  It could be the difference between getting a job or even being able to give yourself the infamous "senior" title.
+4.  You will see an overall improvement in your code quality.
+
+---
+
 ## Pre-Workshop Instructions/Requirements
 
 This workshop is helpful for developers at any level of their career. Though it assumes that you have at a minimum a basic knowledge of JavaScript such as its syntax

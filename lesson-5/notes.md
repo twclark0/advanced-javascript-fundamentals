@@ -136,3 +136,41 @@ let firstName = 'tyler'
 
 console.log(firstName) // tyler
 ```
+
+---
+
+- `const` very similar to `let`.
+- Blocked scoped not scoped to it's execution context
+- Major difference between it and `let` is as mdn states: `The value of a constant can't be changed through reassignment, and it can't be redeclared`
+- Gotcha: Does not do deep equals on object types. Like mutating values in an array or object
+
+Scope example:
+
+```js
+const firstName = 'tyler'
+
+{
+    const firstName = 'clark'
+    console.log(firstName) // clark
+}
+
+console.log(firstName) // tyler
+```
+
+Renaming error example:
+
+```js
+const firstName = 'tyler'
+firstName = 'clark' // TypeError: Assignment to constant variable.
+
+console.log(firstName)
+
+```
+
+```js
+const firstName = ['tyler']
+firstName.length = 0
+
+console.log(firstName) // []
+
+```

@@ -31,13 +31,11 @@ While there are similarities between each lesson, we will work through each exer
 2. Primitive Types, the what, how, and why
 3. Understanding implicit vs explicit coercion
 4. Reference execution with the `this` keyword
-5. Understand lexical vs. dynamic scope
+5. Understand lexical vs. dynamic scope & Hoisting variables with const, let, var & Immediately invoked function (IIFE)
 6. Use the ES6 class keyword
-7. Hoisting variables with const, let, var
-8. Hide variables with closures
-9. Create an immediately invoked function (IIFE)
-10. Utilize date and math objects
-11. Understanding strict mode
+7. Hide variables with closures
+8. Utilize date and math objects
+9. Understanding strict mode
 
 ## System Requirements
 

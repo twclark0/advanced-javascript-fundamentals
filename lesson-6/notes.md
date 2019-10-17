@@ -157,6 +157,7 @@ Rectangle.callRectangle() // Rectangle.callRectangle is not a function
 - From `MDN` "The super keyword is used to access and call functions on an object's parent."
 - When `super` is used, it needs to be used before `this` can be used.
 - Can be used to call the constructor or other (static or not) methods found on parent class (function)
+- Can be used on object literals!
 
 ```js
 class Rectangle {
@@ -220,7 +221,34 @@ const a = new Cat('Fuzzy') // {test: "Fuzzy", name: "Fuzzy"}
 // Error Must call super constructor in derived class before accessing 'this' or returning from derived constructor
 ```
 
-- `new` goes through classes on extends looking at constructors. In order to complete the chain  `super` is required in child constructors
+- `new` goes through classes on extends looking at constructors. In order to complete the chain  `super` is required in child constructors. Begins at highest parent classes constructors.
+- Simply put, if you use a constructor method on a class that is extending another class, it has to call super.
+
+This does not throw an error:
+
+```js
+class Animal {}
+
+class Cat extends Animal {}
+
+const a = new Cat('Fuzzy')  // { }
+
+```
+
+This throws an error:
+
+```js
+class Animal {}
+
+class Cat extends Animal {
+    constructor(name) {
+	    this.test = name
+    }
+}
+
+const a = new Cat('Fuzzy') // Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+
+```
 
 This does not throw error:
 
@@ -255,5 +283,26 @@ class Cat extends Animal {
 }
 
 const a = new Cat('Fuzzy') // {test: "Fuzzy", name: "Fuzzy"}
+
+```
+
+Object literal example:
+
+```js
+const Animal = {
+  method1() {
+    console.log('method 1')
+  }
+}
+
+const Cat = {
+  method2() {
+    super.method1()
+  }
+}
+
+Object.setPrototypeOf(Cat, Animal)
+
+Cat.method2() // "method 1"
 
 ```

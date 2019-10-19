@@ -34,8 +34,7 @@ While there are similarities between each lesson, we will work through each exer
 5. Understand lexical vs. dynamic scope & Hoisting variables with const, let, var & Immediately invoked function (IIFE)
 6. Use the ES6 class keyword
 7. Hide variables with closures
-8. Utilize date and math objects
-9. Understanding strict mode
+8. Understanding strict mode
 
 ## System Requirements
 

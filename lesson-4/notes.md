@@ -40,7 +40,7 @@ person.value.getName() // 'tyler is my first name'
 - Behaves differently depending on `strict mode` or `non-strict mode`
 
 ```js
-var name = 'tyler'
+var firstName = 'tyler'
 
 function getName() {
   return `${this.firstName} is my first name`

@@ -10,7 +10,7 @@ function Foo(name) {
 }
 
 function Bar(name) {
-  Foo.call(this, name)
+  Foo(name)
 }
 
 const a = new Bar('tyler')

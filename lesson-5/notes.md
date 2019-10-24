@@ -8,17 +8,15 @@
 - Think of lexical related to "author" time or at "compile time" or "fixed". It is not decided on when or how the code is executed ("runtime").
 - Other languages have dynamic scoping. Think the opposite of lexical, it's at "runtime". A function references scoped variables at execution. This does not work in JS, however we have the `this` keyword that gives us that dynamic scoping.
 
-
 ```js
 var name = 'tyler'
 
 function findName() {
-    var name = 'clark'
-    return name
+  var name = 'clark'
+  return name
 }
 
-console.log(findName())  //'clark'
-
+console.log(findName()) //'clark'
 ```
 
 dynamic scope example:
@@ -27,16 +25,15 @@ dynamic scope example:
 var name = 'tyler'
 
 function findName() {
-    return name
+  return name
 }
 
 function findAnotherName() {
-    var name = 'clark'
-    return findName()
+  var name = 'clark'
+  return findName()
 }
 
-console.log(findAnotherName())  //'tyler' but if it was dynamic scope it would print 'clark'
-
+console.log(findAnotherName()) //'tyler' but if it was dynamic scope it would print 'clark'
 ```
 
 #### IIFE pattern
@@ -47,16 +44,15 @@ console.log(findAnotherName())  //'tyler' but if it was dynamic scope it would p
 - Function expressions are not accessed in the global namespace
 
 ```js
-(function findName() {
-    return 'hello'
+;(function findName() {
+  return 'hello'
 })()
-
 ```
 
 arrow function example:
 
 ```js
-(() =>  'hello')()
+;(() => 'hello')()
 ```
 
 #### Block scoping
@@ -68,12 +64,11 @@ arrow function example:
 var firstName = 'tyler'
 
 {
-    var firstName = 'clark'
-    console.log(firstName) // clark
+  var firstName = 'clark'
+  console.log(firstName) // clark
 }
 
 console.log(firstName) // clark
-
 ```
 
 #### `var`, `let`, `const`
@@ -105,20 +100,19 @@ x()
 console.log(firstName) // 'clark'
 ```
 
-  ---
+---
 
-  - `let` is different from `var` as it's scope is blocked (statement or expression).
-  - `let` does not create properties on the window object unlike `var`.
-  - `let` is only initialized to value when the parser evaluates it. In other words it is not hoisted to top of scope with initial value of `undefined` like `var`.
-  - Re-declartion of `let` throws an SyntaxError, unlike `var`
-
+- `let` is different from `var` as it's scope is blocked (statement or expression).
+- `let` does not create properties on the window object like `var`.
+- `let` is only initialized to value when the parser evaluates it. In other words it is not hoisted to top of scope with initial value of `undefined` like `var`.
+- Re-declartion of `let` throws an SyntaxError, unlike `var`
 
 ```js
 var firstName = 'tyler'
 
 {
-    var firstName = 'clark'
-    console.log(firstName) // clark
+  var firstName = 'clark'
+  console.log(firstName) // clark
 }
 
 console.log(firstName) // clark
@@ -130,8 +124,8 @@ vs.
 let firstName = 'tyler'
 
 {
-    let firstName = 'clark'
-    console.log(firstName) // clark
+  let firstName = 'clark'
+  console.log(firstName) // clark
 }
 
 console.log(firstName) // tyler
@@ -140,7 +134,7 @@ console.log(firstName) // tyler
 ---
 
 - `const` very similar to `let`.
-- Blocked scoped not scoped to it's execution context
+- Blocked scoped as well
 - Major difference between it and `let` is as mdn states: `The value of a constant can't be changed through reassignment, and it can't be redeclared`
 - Gotcha: Does not do deep equals on object types. Like mutating values in an array or object
 
@@ -150,8 +144,8 @@ Scope example:
 const firstName = 'tyler'
 
 {
-    const firstName = 'clark'
-    console.log(firstName) // clark
+  const firstName = 'clark'
+  console.log(firstName) // clark
 }
 
 console.log(firstName) // tyler
@@ -164,7 +158,6 @@ const firstName = 'tyler'
 firstName = 'clark' // TypeError: Assignment to constant variable.
 
 console.log(firstName)
-
 ```
 
 ```js
@@ -172,5 +165,9 @@ const firstName = ['tyler']
 firstName.length = 0
 
 console.log(firstName) // []
-
 ```
+
+#### Let and Const gotcha: Temporal dead zone
+
+- Because let and const do not start with an initial value hoisted to the top, if you trying to access it before it is initialized with result in a reference error.
+- From MDN: "The variable is in a "temporal dead zone" from the start of the block until the initialization is processed."

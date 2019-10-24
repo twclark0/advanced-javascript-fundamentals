@@ -1,9 +1,26 @@
-## Working with Coercion
+# Prototypes:
 
-1. Make `(a == 1 && a == 2 && a == 3)` always evaluate to `true`
+The following code snippet shows three functions that all return something different. Our goal is to put all of the functions into their own object, then link each object (with their one property) together through the prototype chain:
 
-###### Hint(s)
+```js
+function hasArm() {
+  return true
+}
 
-- We are trying to manipulate coercion. What is the first thing the JS engine will try to do when it sees `==`
-- Look through this lesson's corresponding notes for other hints
-- Think prototype methods....
+function hasLeg() {
+  return false
+}
+
+function hasHead() {
+  return 'yes'
+}
+```
+
+---
+
+Outcome:
+
+- Three objects with one property that have one of the functions listed above
+- Connect each object together through the prototype chain
+- A fourth object without any properties but has access to all three functions through the prototype chain.
+- You'll know you did it right when you can invoke each function from the final object and receive the return values

@@ -1,22 +1,28 @@
-// Example 1
-
-const a = { val: 0 }
-
-a.valueOf = function() {
-  return ++this.val
+const arm = {
+  hasArm() {
+    return true
+  }
 }
 
-console.log(a == 1 && a == 2 && a == 3) //true
-
-/* ********************************** */
-
-// Example 2
-
-const b = new Number(0)
-let val = 0 // why is this needed? Extra credit
-
-b.valueOf = function() {
-  return ++val
+const leg = {
+  hasLeg() {
+    return false
+  }
 }
 
-console.log(b == 1 && b == 2 && b == 3) // true
+const head = {
+  hasHead() {
+    return 'yes'
+  }
+}
+
+Object.setPrototypeOf(arm, leg)
+Object.setPrototypeOf(leg, head)
+
+const person = Object.create(arm)
+
+person.hasArm() // true
+
+person.hasLeg() // false
+
+person.hasHead() // 'yes'

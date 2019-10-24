@@ -11,8 +11,8 @@ Here are some of the real world takeaways from this workshop:
 
 1. You will be able to learn new frameworks more quickly.
 2. Not only will you avoid writing exceptions but will recognize errors quicker.
-3.  It could be the difference between getting a job or even being able to give yourself the infamous "senior" title.
-4.  You will see an overall improvement in your code quality.
+3. It could be the difference between getting a job or even being able to give yourself the infamous "senior" title.
+4. You will see an overall improvement in your code quality.
 
 ---
 
@@ -27,8 +27,8 @@ This workshop is helpful for developers at any level of their career. Though it 
 
 While there are similarities between each lesson, we will work through each exercise independent of each other.
 
-1. How prototypal inheritance works in JS & Create objects with the `new` keyword
-2. Primitive Types, the what, how, and why
+1. Primitive Types, the what, how, and why
+2. How prototypal inheritance works in JS & Create objects with the `new` keyword
 3. Understanding implicit vs explicit coercion
 4. Reference execution with the `this` keyword
 5. Understand lexical vs. dynamic scope & Hoisting variables with const, let, var & Immediately invoked function (IIFE)

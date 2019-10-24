@@ -1,113 +1,200 @@
-## Coercion
+## Prototypes
 
-- Think of it as "Conversion". Changing types from primitive to primitive or object to primitive.
-- To understand your code, you have to learn to interpret code like JS
-- Coercion happens more than you probably think. It is unavoidable... But doesn't have to be a black box... See below...
-- A couple prototypes have a `.toString()` for converting it to a string primitive.
-- Work around for string to object is `JSON.parse` and `JSON.stringify`.
+##### What the prototype?
+
+- The fundamental way inheritance works in JavaScript.
+- Prototypes are objects. It is the linking of objects
+- OO languages work through classes, a parent to child relationship. Typically with classes you use the `new` keyword to create a copy of that blueprint code (class)
+- Prototypes is the linkeage between objects through properties. Or commonly called the prototype chain.
+- When accessing a property, it looks at each object level one at a time until it finds it or returns `null`. So you can "replace" the `.toString()` found on the global `Object.prototype.toString` by giving your object the same property name.
+
+Type in a browser console the following:
+
+```js
+const a = {}
+
+console.log(a)
+```
 
 ---
 
-#### Implicit Coercion
+### Connection between `.prototype` and `__proto__`
 
-- Abstracts away the lower details to provide more focus for the developer. Are the explicit coercion distracting to the reader? Example: Template strings
-
-```js
-const str = `Hello, I have ${someNumber} eyes`
-```
-
-- *First*  JS will do is call the .valueOf function on the wrapper object prototype chain to determine it's primitive value.
-- Afterwards it will coerce the type into the similar type to complete the operation.
-
-
-- Using prototype methods on primitive... Boxing is implicit coercion
-- Overload operators like the `+`
-- Truthy & Falsy checks
+- Functions have a `.prototype` property that points to an object with a constructor property, and a `__proto__` property.
 
 ```js
-if (arr.length) {
-  // do something while arr.length is truthy?
-  // vs. do something while arr.length > 0?
+function a() {
+  return 'hello'
 }
-```
 
-- `==` (Using valueOf on prototype to determine what type it is. Then calls needed method to coerce into right type for comparison.. which then runs same algorithm as `===`)
-
----
-
-#### Explicit Coercion
-
-- Using the native functions (`String`, `Boolean`, `Number`)
-
-```js
-const str = `Hello, I have ${String(someNumber)} eyes`
+console.log(a.prototype)
 ```
 
 ---
 
-##### toString()
+### Working with Built in Objects:
 
-- String(val)
-- .toString()
-- Using the `+` operator
+- First step is understanding the what the global Functions and Prototypes are, i.e:
+- Some are: `Array`, `Object`, `Number`, `String`
+- `Object` vs. `Object.prototype`
 
-```js
-const num = (1).toString()
-// "1"
-
-const arr = [1, 2, 3].toString()
-
-// "1, 2, 3"
-
-const nestedArr = [[], [], []].toString()
-
-// ",,"
-
-const arrEmpty = [null, undefined].toString()
-
-// ","
-
-const obj = { a: 1 }.toString()
-
-// "[object Object]"
-
-const stringNumber = 2 + ''
-
-// '2'
-```
-
-##### toNumber()
-
-- `Number(val)`
-- `parseInt(val)`
-- `parseFloat(val)`
+- `Object.prototype.toString()` vs. `Object.values()`
 
 ```js
-const empty = Number('') // 0
+const b = { name: 'tyler', lastName: 'clark' }
 
-const notANumber = Number('.') // NaN
+b.toString() // "[object Object]"
 
-const zeroDot = Number('0.') // 0
+b.values() // error, not a function
 
-const falses = Number(false) // 0
-
-const trues = Number(true) // 1
-
-const nulls = Number(null) // 0
-
-const undef = Number(undefined) // NaN
-
-const arr = [''] // 0
-
-const arrValue = [1, 2] // NaN
+Object.values(b) // ["tyler", "clark"]
 ```
 
+---
 
-##### toBoolean()
+### Understanding the `new` keyword
 
-- Looks to see if value is falsy or truthy
-- `Boolean(val)`
-- Comparing the value `==` or `===`
+- Does main three things: Creates a new object, connects new object's `__proto__` to function's `.prototype`, `this` used within called function points to new object created. (Fourth is it returns `this` which is that new object)
 
-Falsy: `""`, `0`, `-0`, `null`, `NaN`, `false`, `undefined`
-Truthy: ....everything else.
+1. Creates new object:
+
+```js
+function a() {
+  return 'hello'
+}
+
+const b = new a()
+
+console.log(b) //  { }
+```
+
+2. Connects new object's `__proto__` to function's `.prototype`
+
+```js
+function A() {
+  return 'hello'
+}
+
+A.prototype.name = 'world'
+
+const b = new A()
+
+console.log(b)
+
+console.log(b.name)
+```
+
+3. `this` used within called function points to new object created
+
+```js
+function A() {
+  this.name = 'hello'
+}
+
+const b = new A()
+
+console.log(b)
+
+console.log(b.name)
+```
+
+###### Just for fun:
+
+```js
+function A() {
+  this.name = 'hello'
+}
+
+A.prototype.name = 'world'
+
+const b = new A()
+
+// console.log(b)
+
+// console.log(b.name)
+```
+
+---
+
+### Loops with Prototypes
+
+- Loops can behave differently when objects have chained prototype objects.
+- The for...in statement iterates over all non-Symbol, enumerable properties of an object.
+
+```js
+const obj = {
+  firstName: 'Tyler',
+  lastName: 'Clark'
+}
+
+let n = 0
+for (let property in obj) {
+  n++
+}
+console.log(n) // 2
+```
+
+vs.
+
+```js
+const obj = {
+  firstName: 'Tyler',
+  lastName: 'Clark'
+}
+
+const protoObj = {
+  hair: 'Brown'
+}
+
+Object.setPrototypeOf(obj, protoObj)
+
+let n = 0
+for (let property in obj) {
+  n++
+}
+console.log(n) // 3
+```
+
+- In order to avoid this situation, you need to add a check
+
+```js
+const obj = {
+  firstName: 'Tyler',
+  lastName: 'Clark'
+}
+
+const protoObj = {
+  lastName: 'Brown'
+}
+
+Object.setPrototypeOf(obj, protoObj)
+
+let n = 0
+for (let property in obj) {
+  if (obj.hasOwnProperty(property)) {
+    n++
+  }
+}
+console.log(n) // 2
+```
+
+- Does not map over the nested Object.prototype properties because those are not Enumerable
+- Same reason why loops don't iterate on the `.length` property in arrays
+
+---
+
+### `Object.create`
+
+- `Object.create` creates a object and gives the ability to point another object to be the new object's prototype.
+
+```js
+const house = {
+  houseColor(color) {
+    console.log(`${color} is a good color`)
+  }
+}
+
+const myHouse = Object.create(house) // { }
+
+myHouse.houseColor('blue') // blue is a good color
+```

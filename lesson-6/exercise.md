@@ -2,7 +2,7 @@
 
 - The first problem you are tasked is to simply "make it work". You'll notice a couple of `console.log`s at the bottom of the exercise code that print out the desired results. Using the bare-bones implementation of the code, try to figure out how to make the `console.log`s actually print out what they say they should print out.
 
-- Make sure that the second class `BiggerTriple`'s triple function utilizes the triple function of  `Triple`
+- Make sure that the second class `DoubleTheTriple`'s double function utilizes the triple function of `Triple`
 
 ## Exercise #2
 

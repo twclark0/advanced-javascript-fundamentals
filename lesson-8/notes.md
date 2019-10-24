@@ -46,7 +46,6 @@ function name(first, first) { // syntax error
 
 #### Strict mode and `this`
 
-- `this` is not auto-boxed into an object. Auto-boxing is a performance cost...
 - When `this` references the global object in browsers, strict mode returns undefined... because it is a security hazard.
 
 ```js

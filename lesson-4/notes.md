@@ -1,15 +1,15 @@
 ## `this`
 
 - Simply put, `this` references the execution context of a function's call. Which is determined how the function was called and in non–strict mode, is always a reference to an object.
-- Can be different depending on how the function is called... In other words you cannot look at a function and know what the `this` context will be. You have to see how the function is called at runtime. Functions can be invoked with `()` individually (default binding), `()` on a context object, methods like `call`, and the `new` keyword.
-- Usually one of the most difficult keyword to understand
-- Works differently than most other languages
+- Can be different depending on how the function is called... In other words you cannot look at a function and know what the `this` context will be. You have to see how the function is called at runtime.
+- Important to understand how functions are invoked... Functions can be invoked with `()` individually (implicit binding), methods like `call` (explicit binding), or the `new` keyword.
 
 ---
 
 #### Implicit binding
 
-- _Context object_: where `this` is probably intended to be the object the function lives on:
+-Option 1: _Context object_: where `this` is probably intended to be the object the function lives on:
+
 - From mdn: "When a function is called as a method of an object, its this is set to the object the method is called on."
 
 ```js
@@ -51,50 +51,6 @@ getName() // 'tyler is my first name'
 
 - This example only works with `var` because it puts it on the window / global space
 
-#### Explicit binding
-
-- `apply`, `call`, `bind`: Takes a parameter which assigns the `this` context explicitly.
-
-```js
-const person = {
-  firstName: 'tyler'
-}
-
-function getName() {
-  return `${this.firstName} is my first name`
-}
-
-getName.call(person) // 'tyler is my first name'
-```
-
-```js
-const person = {
-  firstName: 'tyler'
-}
-
-function getName() {
-  return `${this.firstName} is my first name`
-}
-
-getName.apply(person) // 'tyler is my first name'
-```
-
-- `new` keyword: Does four main things. Creates a new object, points `this` to new object, link's `.prototype` to new object `__proto__`, and returns `this` (which is that new object)
-
-```js
-function a() {
-  this.firstName = 'hello'
-}
-
-const b = new a() // {firstName: "hello"}
-
-console.log(b.firstName) // 'hello'
-```
-
----
-
-#### Clashing of contexts
-
 - Look at call site of function, where is it actually called?
 
 ```js
@@ -125,10 +81,52 @@ anotherPerson.getName = person.getName
 anotherPerson.getName() // "undefined is my first name"
 ```
 
+#### Explicit binding
+
+- `apply`, `call`, `bind`: Takes a parameter which assigns the `this` context explicitly.
+
+```js
+const person = {
+  firstName: 'tyler'
+}
+
+function getName() {
+  return `${this.firstName} is my first name`
+}
+
+getName.call(person) // 'tyler is my first name'
+```
+
+```js
+const person = {
+  firstName: 'tyler'
+}
+
+function getName() {
+  return `${this.firstName} is my first name`
+}
+
+getName.apply(person) // 'tyler is my first name'
+```
+
+- `new` keyword: Does three main things. Creates a new object, points `this` to new object, link's `.prototype` to new object `__proto__`, and returns `this` (which is that new object)
+
+```js
+function a() {
+  this.firstName = 'hello'
+}
+
+const b = new a() // {firstName: "hello"}
+
+console.log(b.firstName) // 'hello'
+```
+
+---
+
 ###### Arrow functions
 
-- Arrow functions have no concept of `this`. If you use a `this` inside of a arrow function it will act like any other variable. It will lexically resolves to enclosing scope looking for a this.
-- It's not a fix all solution for for our troubles with `this`
+- Arrow functions have no concept of `this`. If you use a `this` inside of a arrow function it will act like any other variable. It will lexically resolve to the enclosing scope looking for a this.
+- It's not a fix all solution for our troubles with `this`
 
 ```js
 const person = {
@@ -156,8 +154,6 @@ const person = {
 }
 
 window.setInterval(person.getName(), 3000) // "undefined is my first name"
-
-person.getName()() // "undefined is my first name"
 ```
 
 **wrong**
@@ -202,7 +198,7 @@ const person = {
   }
 }
 
-person.getName() // "undefined is my first name"
+person.getName() // "tyler is my first name"
 ```
 
 ###### Arrow function gotchas
@@ -228,9 +224,9 @@ const proto = {
 
 const person = Object.create(proto) // { }
 
-person.firstName = 'tyler' // { name: 'tyler' }
+person.firstName = 'tyler' // { firstName: 'tyler' }
 
-person.myName // 'tyler'
+console.log(person.myName) // 'tyler'
 ```
 
 - Arrow functions rules still apply
@@ -244,7 +240,7 @@ const proto = {
 
 const person = Object.create(proto) // { }
 
-person.firstName = 'tyler' // { name: 'tyler' }
+person.firstName = 'tyler' // { firstName: 'tyler' }
 
 person.myName() // 'undefined'
 ```

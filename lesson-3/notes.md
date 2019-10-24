@@ -46,7 +46,7 @@ const str = `Hello, I have ${String(someNumber)} eyes`
 
 ---
 
-##### Explicit toString()
+##### to-string coercion
 
 - String(val)
 - .toString()
@@ -81,7 +81,7 @@ const arrEmpty = [null, undefined].toString()
 // ","
 ```
 
-##### toNumber()
+##### to-number()
 
 - `Number(val)`
 - `parseInt(val)`
@@ -106,12 +106,12 @@ const nulls = Number(null) // 0
 
 const undef = Number(undefined) // NaN
 
-const arr = [''] // 0
+const arr = Number(['']) // 0
 
-const arrValue = [1, 2] // NaN
+const arrValue = Number([1, 2]) // NaN
 ```
 
-##### toBoolean()
+##### to-boolean
 
 - Looks to see if value is falsy or truthy
 - `Boolean(val)`

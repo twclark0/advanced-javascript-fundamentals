@@ -9,31 +9,31 @@
 - Other languages have dynamic scoping. Think the opposite of lexical, it's at "runtime". A function references scoped variables at execution. This does not work in JS, however we have the `this` keyword that gives us that dynamic scoping.
 
 ```js
-var name = 'tyler'
+var name = "tyler";
 
 function findName() {
-  var name = 'clark'
-  return name
+  var name = "clark";
+  return name;
 }
 
-console.log(findName()) //'clark'
+console.log(findName()); //'clark'
 ```
 
 dynamic scope example:
 
 ```js
-var name = 'tyler'
+var name = "tyler";
 
 function findName() {
-  return name
+  return name;
 }
 
 function findAnotherName() {
-  var name = 'clark'
-  return findName()
+  var name = "clark";
+  return findName();
 }
 
-console.log(findAnotherName()) //'tyler' but if it was dynamic scope it would print 'clark'
+console.log(findAnotherName()); //'tyler' but if it was dynamic scope it would print 'clark'
 ```
 
 #### IIFE pattern
@@ -41,18 +41,17 @@ console.log(findAnotherName()) //'tyler' but if it was dynamic scope it would pr
 - Means the function is executed immediately after the completion of the definition.
 - This does not put the function on the global space. Meaning the function cannot be access anywhere else
 - Magic behind it is the initial wrapping of the function with `()`, which is called the `grouping operator`.. this makes it an expression because it is returning something.
-- Function expressions are not accessed in the global namespace
 
 ```js
-;(function findName() {
-  return 'hello'
-})()
+(function findName() {
+  return "hello";
+})();
 ```
 
 arrow function example:
 
 ```js
-;(() => 'hello')()
+(() => "hello")();
 ```
 
 #### Block scoping
@@ -61,14 +60,14 @@ arrow function example:
 - Objects are not scoped so you cannot go by the global rule that all `{}` means a scope.
 
 ```js
-var firstName = 'tyler'
+var firstName = "tyler";
 
 {
-  var firstName = 'clark'
-  console.log(firstName) // clark
+  var firstName = "clark";
+  console.log(firstName); // clark
 }
 
-console.log(firstName) // clark
+console.log(firstName); // clark
 ```
 
 #### `var`, `let`, `const`
@@ -78,26 +77,26 @@ console.log(firstName) // clark
 - It's declaration is equal to `undefined` and hoisted to the top of it's execution context.
 
 ```js
-var firstName = 'tyler'
+var firstName = "tyler";
 
 function x() {
-  var firstName = 'clark'
-  console.log(firstName) // 'clark'
+  var firstName = "clark";
+  console.log(firstName); // 'clark'
 }
 
-console.log(firstName) // 'tyler'
+console.log(firstName); // 'tyler'
 ```
 
 - Any assignment without a variable statement puts it on the global object, regardless of it's execution context
 
 ```js
 function x() {
-  firstName = 'clark'
-  console.log(firstName) // 'clark'
+  firstName = "clark";
+  console.log(firstName); // 'clark'
 }
-x()
+x();
 
-console.log(firstName) // 'clark'
+console.log(firstName); // 'clark'
 ```
 
 ---
@@ -108,27 +107,27 @@ console.log(firstName) // 'clark'
 - Re-declartion of `let` throws an SyntaxError, unlike `var`
 
 ```js
-var firstName = 'tyler'
+var firstName = "tyler";
 
 {
-  var firstName = 'clark'
-  console.log(firstName) // clark
+  var firstName = "clark";
+  console.log(firstName); // clark
 }
 
-console.log(firstName) // clark
+console.log(firstName); // clark
 ```
 
 vs.
 
 ```js
-let firstName = 'tyler'
+let firstName = "tyler";
 
 {
-  let firstName = 'clark'
-  console.log(firstName) // clark
+  let firstName = "clark";
+  console.log(firstName); // clark
 }
 
-console.log(firstName) // tyler
+console.log(firstName); // tyler
 ```
 
 ---
@@ -141,30 +140,30 @@ console.log(firstName) // tyler
 Scope example:
 
 ```js
-const firstName = 'tyler'
+const firstName = "tyler";
 
 {
-  const firstName = 'clark'
-  console.log(firstName) // clark
+  const firstName = "clark";
+  console.log(firstName); // clark
 }
 
-console.log(firstName) // tyler
+console.log(firstName); // tyler
 ```
 
 Renaming error example:
 
 ```js
-const firstName = 'tyler'
-firstName = 'clark' // TypeError: Assignment to constant variable.
+const firstName = "tyler";
+firstName = "clark"; // TypeError: Assignment to constant variable.
 
-console.log(firstName)
+console.log(firstName);
 ```
 
 ```js
-const firstName = ['tyler']
-firstName.length = 0
+const firstName = ["tyler"];
+firstName.length = 0;
 
-console.log(firstName) // []
+console.log(firstName); // []
 ```
 
 #### Let and Const gotcha: Temporal dead zone

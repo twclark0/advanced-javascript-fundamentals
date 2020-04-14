@@ -11,9 +11,9 @@
 Type in a browser console the following:
 
 ```js
-const a = {}
+const a = {};
 
-console.log(a)
+console.log(a);
 ```
 
 ---
@@ -24,90 +24,90 @@ console.log(a)
 
 ```js
 function a() {
-  return 'hello'
+  return "hello";
 }
 
-console.log(a.prototype)
+console.log(a.prototype);
 ```
 
 ---
 
 ### Working with Built in Objects:
 
-- First step is understanding the what the global Functions and Prototypes are, i.e:
+- First step is understanding what the global Functions and Prototypes are, i.e:
 - Some are: `Array`, `Object`, `Number`, `String`
 - `Object` vs. `Object.prototype`
 
 - `Object.prototype.toString()` vs. `Object.values()`
 
 ```js
-const b = { name: 'tyler', lastName: 'clark' }
+const b = { name: "tyler", lastName: "clark" };
 
-b.toString() // "[object Object]"
+b.toString(); // "[object Object]"
 
-b.values() // error, not a function
+b.values(); // error, not a function
 
-Object.values(b) // ["tyler", "clark"]
+Object.values(b); // ["tyler", "clark"]
 ```
 
 ---
 
 ### Understanding the `new` keyword
 
-- Does main three things: Creates a new object, connects new object's `__proto__` to function's `.prototype`, `this` used within called function points to new object created. (Fourth is it returns `this` which is that new object)
+- Does three main things: Creates a new object, connects new object's `__proto__` to function's `.prototype`, `this` used within called function points to new object created. (Fourth is it returns `this` which is that new object)
 
 1. Creates new object:
 
 ```js
 function a() {
-  return 'hello'
+  return "hello";
 }
 
-const b = new a()
+const b = new a();
 
-console.log(b) //  { }
+console.log(b); //  { }
 ```
 
 2. Connects new object's `__proto__` to function's `.prototype`
 
 ```js
 function A() {
-  return 'hello'
+  return "hello";
 }
 
-A.prototype.name = 'world'
+A.prototype.name = "world";
 
-const b = new A()
+const b = new A();
 
-console.log(b)
+console.log(b);
 
-console.log(b.name)
+console.log(b.name);
 ```
 
 3. `this` used within called function points to new object created
 
 ```js
 function A() {
-  this.name = 'hello'
+  this.name = "hello";
 }
 
-const b = new A()
+const b = new A();
 
-console.log(b)
+console.log(b);
 
-console.log(b.name)
+console.log(b.name);
 ```
 
 ###### Just for fun:
 
 ```js
 function A() {
-  this.name = 'hello'
+  this.name = "hello";
 }
 
-A.prototype.name = 'world'
+A.prototype.name = "world";
 
-const b = new A()
+const b = new A();
 
 // console.log(b)
 
@@ -123,59 +123,59 @@ const b = new A()
 
 ```js
 const obj = {
-  firstName: 'Tyler',
-  lastName: 'Clark'
-}
+  firstName: "Tyler",
+  lastName: "Clark",
+};
 
-let n = 0
+let n = 0;
 for (let property in obj) {
-  n++
+  n++;
 }
-console.log(n) // 2
+console.log(n); // 2
 ```
 
 vs.
 
 ```js
 const obj = {
-  firstName: 'Tyler',
-  lastName: 'Clark'
-}
+  firstName: "Tyler",
+  lastName: "Clark",
+};
 
 const protoObj = {
-  hair: 'Brown'
-}
+  hair: "Brown",
+};
 
-Object.setPrototypeOf(obj, protoObj)
+Object.setPrototypeOf(obj, protoObj);
 
-let n = 0
+let n = 0;
 for (let property in obj) {
-  n++
+  n++;
 }
-console.log(n) // 3
+console.log(n); // 3
 ```
 
 - In order to avoid this situation, you need to add a check
 
 ```js
 const obj = {
-  firstName: 'Tyler',
-  lastName: 'Clark'
-}
+  firstName: "Tyler",
+  lastName: "Clark",
+};
 
 const protoObj = {
-  lastName: 'Brown'
-}
+  lastName: "Brown",
+};
 
-Object.setPrototypeOf(obj, protoObj)
+Object.setPrototypeOf(obj, protoObj);
 
-let n = 0
+let n = 0;
 for (let property in obj) {
   if (obj.hasOwnProperty(property)) {
-    n++
+    n++;
   }
 }
-console.log(n) // 2
+console.log(n); // 2
 ```
 
 - Does not map over the nested Object.prototype properties because those are not Enumerable
@@ -190,11 +190,11 @@ console.log(n) // 2
 ```js
 const house = {
   houseColor(color) {
-    console.log(`${color} is a good color`)
-  }
-}
+    console.log(`${color} is a good color`);
+  },
+};
 
-const myHouse = Object.create(house) // { }
+const myHouse = Object.create(house); // { }
 
-myHouse.houseColor('blue') // blue is a good color
+myHouse.houseColor("blue"); // blue is a good color
 ```

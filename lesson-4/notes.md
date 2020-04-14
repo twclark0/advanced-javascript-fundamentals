@@ -14,39 +14,39 @@
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName() {
-    return `${this.firstName} is my first name`
-  }
-}
+    return `${this.firstName} is my first name`;
+  },
+};
 
-person.getName() // 'tyler is my first name'
+person.getName(); // 'tyler is my first name'
 ```
 
 ```js
 const person = {
   value: {
-    firstName: 'tyler',
+    firstName: "tyler",
     getName() {
-      return `${this.firstName} is my first name`
-    }
-  }
-}
+      return `${this.firstName} is my first name`;
+    },
+  },
+};
 
-person.value.getName() // 'tyler is my first name'
+person.value.getName(); // 'tyler is my first name'
 ```
 
 - Invoking `()` individually: _Default binding_ where it is called with a context and `this` defaults to the global
 - Behaves differently depending on `strict mode` or `non-strict mode`
 
 ```js
-var firstName = 'tyler'
+var firstName = "tyler";
 
 function getName() {
-  return `${this.firstName} is my first name`
+  return `${this.firstName} is my first name`;
 }
 
-getName() // 'tyler is my first name'
+getName(); // 'tyler is my first name'
 ```
 
 - This example only works with `var` because it puts it on the window / global space
@@ -55,30 +55,30 @@ getName() // 'tyler is my first name'
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName() {
-    console.log(`${this.firstName} is my first name`)
-  }
-}
+    console.log(`${this.firstName} is my first name`);
+  },
+};
 
-window.setInterval(person.getName, 3000) // "undefined is my first name"
+window.setInterval(person.getName, 3000); // "undefined is my first name"
 ```
 
 Still confused? Here's another example
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName() {
-    return `${this.firstName} is my first name`
-  }
-}
+    return `${this.firstName} is my first name`;
+  },
+};
 
-const anotherPerson = {}
+const anotherPerson = {};
 
-anotherPerson.getName = person.getName
+anotherPerson.getName = person.getName;
 
-anotherPerson.getName() // "undefined is my first name"
+anotherPerson.getName(); // "undefined is my first name"
 ```
 
 #### Explicit binding
@@ -87,38 +87,38 @@ anotherPerson.getName() // "undefined is my first name"
 
 ```js
 const person = {
-  firstName: 'tyler'
-}
+  firstName: "tyler",
+};
 
 function getName() {
-  return `${this.firstName} is my first name`
+  return `${this.firstName} is my first name`;
 }
 
-getName.call(person) // 'tyler is my first name'
+getName.call(person); // 'tyler is my first name'
 ```
 
 ```js
 const person = {
-  firstName: 'tyler'
-}
+  firstName: "tyler",
+};
 
 function getName() {
-  return `${this.firstName} is my first name`
+  return `${this.firstName} is my first name`;
 }
 
-getName.apply(person) // 'tyler is my first name'
+getName.apply(person); // 'tyler is my first name'
 ```
 
 - `new` keyword: Does three main things. Creates a new object, points `this` to new object, link's `.prototype` to new object `__proto__`, and returns `this` (which is that new object)
 
 ```js
 function a() {
-  this.firstName = 'hello'
+  this.firstName = "hello";
 }
 
-const b = new a() // {firstName: "hello"}
+const b = new a(); // {firstName: "hello"}
 
-console.log(b.firstName) // 'hello'
+console.log(b.firstName); // 'hello'
 ```
 
 ---
@@ -130,75 +130,75 @@ console.log(b.firstName) // 'hello'
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName: () => {
-    console.log(`${this.firstName} is my first name`)
-  }
-}
+    console.log(`${this.firstName} is my first name`);
+  },
+};
 
-window.setInterval(person.getName, 3000) // "undefined is my first name"
+window.setInterval(person.getName, 3000); // "undefined is my first name"
 
-person.getName() // "undefined is my first name"
+person.getName(); // "undefined is my first name"
 ```
 
-- First need to understand lexical scoping. Lexical scoping references the parent _function_ context / scope. This is the enclosing function or the window. Object curly bracket's do not represent "scope". We are looking for function curlys for scope.
+- First need to understand our lexical scope. Our `this` lexical scope references the next parent _function_ context / scope. This is the enclosing function or the window. Object curly bracket's do not represent "scope". We are looking for function curlys for scope.
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName: () => {
-    return function() {
-      console.log(`${this.firstName} is my first name`)
-    }
-  }
-}
+    return function () {
+      console.log(`${this.firstName} is my first name`);
+    };
+  },
+};
 
-window.setInterval(person.getName(), 3000) // "undefined is my first name"
+window.setInterval(person.getName(), 3000); // "undefined is my first name"
 ```
 
 **wrong**
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName() {
-    window.setInterval(function() {
-      console.log(`${this.firstName} is my first name`)
-    }, 3000)
-  }
-}
+    window.setInterval(function () {
+      console.log(`${this.firstName} is my first name`);
+    }, 3000);
+  },
+};
 
-person.getName() // "undefined is my first name"
+person.getName(); // "undefined is my first name"
 ```
 
 **wrong**
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName: () => {
-    window.setInterval(function() {
-      console.log(`${this.firstName} is my first name`)
-    }, 3000)
-  }
-}
+    window.setInterval(function () {
+      console.log(`${this.firstName} is my first name`);
+    }, 3000);
+  },
+};
 
-person.getName() // "undefined is my first name"
+person.getName(); // "undefined is my first name"
 ```
 
 **answer**
 
 ```js
 const person = {
-  firstName: 'tyler',
+  firstName: "tyler",
   getName() {
     window.setInterval(() => {
-      console.log(`${this.firstName} is my first name`)
-    }, 3000)
-  }
-}
+      console.log(`${this.firstName} is my first name`);
+    }, 3000);
+  },
+};
 
-person.getName() // "tyler is my first name"
+person.getName(); // "tyler is my first name"
 ```
 
 ###### Arrow function gotchas
@@ -218,15 +218,15 @@ person.getName() // "tyler is my first name"
 ```js
 const proto = {
   get myName() {
-    return this.firstName
-  }
-}
+    return this.firstName;
+  },
+};
 
-const person = Object.create(proto) // { }
+const person = Object.create(proto); // { }
 
-person.firstName = 'tyler' // { firstName: 'tyler' }
+person.firstName = "tyler"; // { firstName: 'tyler' }
 
-console.log(person.myName) // 'tyler'
+console.log(person.myName); // 'tyler'
 ```
 
 - Arrow functions rules still apply
@@ -234,15 +234,15 @@ console.log(person.myName) // 'tyler'
 ```js
 const proto = {
   myName: () => {
-    return this.firstName
-  }
-}
+    return this.firstName;
+  },
+};
 
-const person = Object.create(proto) // { }
+const person = Object.create(proto); // { }
 
-person.firstName = 'tyler' // { firstName: 'tyler' }
+person.firstName = "tyler"; // { firstName: 'tyler' }
 
-person.myName() // 'undefined'
+person.myName(); // 'undefined'
 ```
 
 ---
